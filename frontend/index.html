@@ -364,5 +364,16 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <!-- Service Worker Kaydı (PWA İçin) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('Service Worker kayıt başarılı:', reg))
+          .catch(err => console.log('Service Worker kayıt hatası:', err));
+      });
+    }
+  </script>
+</body>
 </body>
 </html>
