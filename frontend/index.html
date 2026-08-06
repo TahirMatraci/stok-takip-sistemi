@@ -206,29 +206,62 @@
 
     
   </style>
-  <style>
-  @media (max-width: 768px) {
-    .button-group, .form-group, .actions, form {
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  /* Mobil Ekranlar İçin Tam Uyum (768px ve altı) */
+  @media screen and (max-width: 768px) {
+    body {
+      padding: 8px !important;
+      margin: 0 !important;
+    }
+    
+    /* Tüm kapsayıcı kutuları ekrana sığdırır */
+    div, section, main, .container, .card, fieldset {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      padding: 10px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    /* Form elemanlarını ve buton yan yana düzenlerini dikey yapar */
+    form, .form-group, .row, .grid, div:has(> button) {
       display: flex !important;
       flex-direction: column !important;
       width: 100% !important;
       gap: 10px !important;
     }
 
-    button, .btn, input[type="submit"] {
+    /* Butonları tam genişlik yapıp tıklamayı kolaylaştırır */
+    button, input[type="submit"], input[type="button"], input[type="reset"], .btn {
       width: 100% !important;
+      display: block !important;
+      min-height: 48px !important; /* Mobil parmak teması için ideal yükseklik */
+      font-size: 16px !important;
       box-sizing: border-box !important;
-      margin: 5px 0 !important;
-      white-space: normal !important;
+      margin: 4px 0 !important;
     }
 
-    .table-container, table {
+    /* İnput ve seçim kutularını genişletir */
+    input[type="text"], input[type="number"], input[type="date"], select, textarea {
+      width: 100% !important;
+      height: 44px !important;
+      font-size: 16px !important; /* iOS'in otomatik zoom yapmasını engeller */
+      box-sizing: border-box !important;
+    }
+
+    /* Tabloların ekranı sağa doğru patlatmasını önler */
+    table {
       display: block !important;
+      width: 100% !important;
       overflow-x: auto !important;
-      max-width: 100% !important;
+      white-space: nowrap !important;
     }
   }
 </style>
+  
 </head>
 <body>
 
