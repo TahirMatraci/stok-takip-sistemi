@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaanlar Gıda A.Ş. - Lojistik & Sevkiyat Takibi</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #eef7f6; 
+      color: #1e3a8a; 
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1b5e76 0%, #1e3c72 50%, #2e7d32 100%);
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .brand-container { display: flex; align-items: center; gap: 15px; }
+    .logo-badge {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: bold;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+    .brand-title h1 { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+    .brand-title p { font-size: 13px; opacity: 0.85; font-weight: 300; }
+
+    .nav-links { display: flex; gap: 15px; align-items: center; }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .nav-link.active { background-color: white; color: #1b5e76; }
+    .nav-link:hover:not(.active) { background-color: rgba(255, 255, 255, 0.15); }
+
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; flex: 1; width: 100%; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+    .kpi-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-left: 5px solid #1b5e76;
+    }
+    .kpi-card.green { border-left-color: #2e7d32; }
+    .kpi-card.red { border-left-color: #ef4444; }
+    .kpi-title { font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 26px; font-weight: 800; color: #0f2b48; }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+    .card-title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #2e7d32;
+      margin-bottom: 20px;
+    }
+    .card-title { font-size: 20px; font-weight: 700; color: #0f2b48; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 14px; font-weight: 600; color: #475569; }
+    .form-group input, .form-group select {
+      padding: 12px 15px;
+      border: 1px solid #e2e8f0;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: #1b5e76; background-color: #fff; box-shadow: 0 0 0 3px rgba(27, 94, 118, 0.1); }
+    
+    .form-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+    .btn-submit {
+      background: linear-gradient(135deg, #1b755e 0%, #2e7d32 100%);
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(46, 125, 50, 0.4); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .table-responsive { overflow-x: auto; border-radius: 8px; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; }
+    
+    th {
+      background-color: #1b4d3e;
+      color: white;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+    th:first-child { border-top-left-radius: 8px; width: 50px; text-align: center; }
+    th:last-child { border-top-right-radius: 8px; text-align: right; }
+
+    td {
+      padding: 14px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+      background-color: #ffffff;
+      transition: background-color 0.15s;
+    }
+    td:first-child { text-align: center; font-weight: bold; }
+    tr:hover td { background-color: #f1f5f9; }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .badge--gelen { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .badge--giden { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+    /* Modern Toast Bildirim Kutusu */
+    #toast-container {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      min-width: 300px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideIn 0.3s ease-out forwards;
+    }
+    .toast.basarili { background-color: #16a34a; border-left: 6px solid #15803d; }
+    .toast.hata { background-color: #dc2626; border-left: 6px solid #b91c1c; }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    footer {
+      background: #1e293b;
+      color: #94a3b8;
+      text-align: center;
+      padding: 20px 40px;
+      font-size: 13px;
+      margin-top: 40px;
+      border-top: 3px solid #2e7d32;
+    }
+    footer p { margin: 4px 0; }
+    footer strong { color: #f8fafc; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header>
+    <div class="brand-container">
+      <div class="logo-badge">KG</div>
+      <div class="brand-title">
+        <h1>Kaanlar Gıda A.Ş.</h1>
+        <p>Depo Stok & Lojistik Paneli</p>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Stok Takibi</a>
+      <a href="shipments.html" class="nav-link active">Lojistik & Sevkiyat</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Lojistik KPI Özet Kartları -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Toplam Sevkiyat Hareketi</div>
+        <div class="kpi-value" id="kpi-toplam-sevkiyat">0</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-title">Toplam Gelen Ürün</div>
+        <div class="kpi-value" id="kpi-gelen-miktar" style="color: #2e7d32;">0 Adet</div>
+      </div>
+      <div class="kpi-card red">
+        <div class="kpi-title">Toplam Giden Ürün</div>
+        <div class="kpi-value" id="kpi-giden-miktar" style="color: #ef4444;">0 Adet</div>
+      </div>
+    </div>
+
+    <!-- Sevkiyat Kayıt Formu -->
+    <div class="card">
+      <div class="card-title-container">
+        <h2 class="card-title">Yeni Sevkiyat Kaydı Oluştur</h2>
+      </div>
+      <form id="sevkiyat-formu">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="urun-secim">Sevk Edilecek Ürün</label>
+            <select id="urun-secim" required>
+              <option value="">Ürün Seçiniz...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sevkiyat-turu">Sevkiyat Yönü / Türü</label>
+            <select id="sevkiyat-turu" required>
+              <option value="GELEN">GELEN (Tedarikçiden Depoya Giriş)</option>
+              <option value="GIDEN">GİDEN (Depodan Şubeye/Müşteriye Çıkış)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sevk-miktari">Miktar (Adet)</label>
+            <input type="number" id="sevk-miktari" placeholder="Örn: 100" required min="1">
+          </div>
+          <div class="form-group">
+            <label for="lokasyon-bilgisi">Hedef / Kaynak Lokasyon</label>
+            <input type="text" id="lokasyon-bilgisi" placeholder="Örn: Kadıköy Şubesi" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-sevkiyat-kaydet" class="btn-submit">Sevkiyat Kaydet</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sevkiyat Geçmişi Tablosu -->
+    <div class="card">
+      <div class="card-title-container">
+        <h2 class="card-title">Sevkiyat Hareket Geçmişi</h2>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>ÜRÜN ADI</th>
+              <th>SEVKİYAT TÜRÜ</th>
+              <th>MİKTAR</th>
+              <th>LOKASYON</th>
+              <th>TARİH</th>
+            </tr>
+          </thead>
+          <tbody id="sevkiyat-tablosu-govde">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <footer>
+    <p><strong>© 2026 Kaanlar Gıda A.Ş.</strong> - Tüm Hakları Saklıdır.</p>
+    <p>Depo Stok Takip ve Yönetim Otomasyonu v1.0</p>
+  </footer>
+
+  <script src="js/shipments.js"></script>
+</body>
+</html>

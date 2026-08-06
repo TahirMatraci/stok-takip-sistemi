@@ -1,0 +1,23 @@
+{
+  "name": "kaanlar-gida-stok-projesi",
+  "version": "1.0.0",
+  "description": "Kaanlar Gıda A.Ş. - Depo Stok Takip Sistemi ve Kurum İçi Görev Yönetimi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "stok",
+    "depo",
+    "todo",
+    "kaanlar-gida"
+  ],
+  "author": "Kaanlar Gıda A.Ş.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.22.0",
+    "sqlite3": "^6.0.1"
+  }
+}
