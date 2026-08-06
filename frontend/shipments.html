@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaanlar Gıda A.Ş. - Lojistik & Sevkiyat Takibi</title>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1b5e76">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { 
@@ -204,6 +206,65 @@
     footer p { margin: 4px 0; }
     footer strong { color: #f8fafc; }
   </style>
+  <!-- MOBİL EKRANLAR İÇİN ZORUNLU TASARIM -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style>
+  @media screen and (max-width: 768px) {
+    /* Ekranın sağa-sola kaymasını kesin engeller */
+    html, body {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      padding: 5px !important;
+      margin: 0 !important;
+    }
+
+    /* Tüm kutu, kart ve ana alanları dikey hizalar */
+    div, section, main, form, container, .card, .panel {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    /* Yan yana duran butonları ve girdileri alt alta alır */
+    .button-group, .form-group, .actions, .row, .grid, form > div {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      gap: 8px !important;
+    }
+
+    /* Butonları ekrana tam genişlikte yayar */
+    button, input[type="submit"], input[type="button"], a.btn, .btn {
+      width: 100% !important;
+      display: block !important;
+      min-height: 48px !important;
+      font-size: 16px !important;
+      box-sizing: border-box !important;
+      margin: 4px 0 !important;
+    }
+
+    /* Input ve Select alanlarını büyütür */
+    input[type="text"], input[type="number"], input[type="date"], select, textarea {
+      width: 100% !important;
+      height: 44px !important;
+      font-size: 16px !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Tablo taşmalarını engeller */
+    table {
+      display: block !important;
+      width: 100% !important;
+      overflow-x: auto !important;
+      white-space: nowrap !important;
+    }
+  }
+</style>
 </head>
 <body>
 
